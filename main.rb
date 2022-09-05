@@ -1,8 +1,10 @@
 require 'colorize'
-# One parent class: Mastermind. Two child classes: Codebreaker and codemaker.
+# One parent class: Mastermind. Two child classes: Codebreaker and Codemaker.
 class Mastermind
   def initialize
-    @pegs = { 1 => :blue, 2 => :red, 3 => :yellow, 4 => :magenta, 5 => :cyan, 6 => :green }
+    @pegs = [1, 2, 3, 4, 5, 6]
+    @is_codemaker = false
+    @is_codebreaker = false
   end
 
   def start
@@ -20,6 +22,18 @@ the numbers and press enter."
     puts "#{'  1  '.on_blue} #{'  2  '.on_red} #{'  3  '.on_yellow} #{'  4  '.on_magenta} #{'  5  '.on_cyan} #{'  6  '.on_green}"
     puts "\r"
   end
+
+  def codebreaker_or_codemaker
+    puts "Type 1 if you want to play as the #{'codemaker'.underline}, or 2 to play as the #{'codebreaker'.underline}: "
+    choice = gets
+    if choice == '1'
+      @is_codemaker = true
+    else
+      @is_codebreaker = true
+    end
+  end
 end
 
-Mastermind.new
+game_start = Mastermind.new
+game_start.start
+game_start.codebreaker_or_codemaker
